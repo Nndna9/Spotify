@@ -64,7 +64,16 @@ with col2:
 st.divider()
 
 # ---------------- LOAD DATA ----------------
-df = pd.read_csv("spotify.csv")
+import os
+
+@st.cache_data
+def load_data():
+    base_path = os.path.dirname(__file__)
+    csv_path = os.path.join(base_path, "spotify.csv")
+    return pd.read_csv(csv_path)
+
+df = load_data()
+
 
 # ---------------- SIDEBAR FILTERS ----------------
 st.sidebar.header("🎛️ Filters")
